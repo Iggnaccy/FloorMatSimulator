@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Table Manipulator Control</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Table Manipulator Control</h1>
+  <div>
+    <h2>Select Table Manipulator</h2>
+    <button id="btnTableRandomizer" onclick="setTableManipulator('TableRandomizer')">TableRandomizer</button>
+    <button id="btnCircleTableWalker" onclick="setTableManipulator('CircleTableWalker')">CircleTableWalker</button>
+  </div>
+  
+  <div id="circleParams" style="display: none;">
+    <h2>Set CircleTableWalker Parameters</h2>
+    <input type="number" id="circleX" placeholder="X Position" min="0">
+    <input type="number" id="circleY" placeholder="Y Position" min="0">
+    <input type="number" id="circleRadius" placeholder="Radius" min="1">
+    <button onclick="setCircleParameters()">Set Parameters</button>
+  </div>
+
+  <div>
+    <h2>Set Table Size</h2>
+    <input type="number" id="tableWidth" placeholder="Width" value="10" min="1">
+    <input type="number" id="tableHeight" placeholder="Height" value="10" min="1">
+    <button onclick="setTableSize()">Set Size</button>
+  </div>
+
+  <div>
+    <h2>Select Display Method</h2>
+    <button id="btnConsoleDisplay" onclick="setDisplayMethod('ConsoleTableLogger')">Console Display</button>
+    <button id="btnWebDisplay" onclick="setDisplayMethod('WebPageTableDisplay')">Web Page Display</button>
+  </div>
+
+  <div>
+    <h2>Set Framerate</h2>
+    <input type="number" id="framerateInput" placeholder="Framerate" value="2" min="1">
+    <button onclick="setFramerate()">Set Framerate</button>
+    <p>Current Framerate: <span id="currentFramerate">2</span> FPS</p>
+  </div>
+
+  <div id="tableContainer" style="display: none;">
+    <h2>Table Display</h2>
+    <div id="tableDisplay"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
