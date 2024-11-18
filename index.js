@@ -168,6 +168,24 @@ app.post('/set-framerate', (req, res) => {
     res.json({ status: 'Framerate updated to ' + newFramerate + ' FPS' });
   });
 
+// API endpoint to change the randomizer chance
+app.post('/set-chance', (req, res) => {
+    const { chance } = req.body;
+    const newChance = parseFloat(chance);
+
+    if(isNaN(newChance) || newChance < 0 || newChance > 1) {
+        return res.status(400).json({status: 'Invalid chance value'});
+    }
+
+    if(tableManipulator instanceof TableRandomizer) {
+        tableManipulator.setChance(newChance);
+    } else {
+        return res.status(400).json({status: 'TableRandomizer is not current table manipulator'});
+    }
+
+    res.json({status: 'Chance updated to ' + chance});
+});
+
 // Start the server
 server.listen(3000, () => {
   console.log('Server started on http://localhost:3000');

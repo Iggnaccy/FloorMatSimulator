@@ -9,7 +9,11 @@ class TableRandomizer {
         for (let i = 0; i < array.length; i++) {
             array[i] = Math.random() >= this.chance;
         }
-    }    
+    }
+    
+    setChance(chance) {
+        this.chance = chance;
+    }
 }
 
 module.exports = TableRandomizer;

@@ -21,6 +21,7 @@ function setTableManipulator(manipulator) {
       currentManipulator = manipulator;
       updateManipulatorButtons();
       updateCircleParamsVisibility();
+      updateChanceVisibility();
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -125,6 +126,33 @@ function setCircleParameters() {
     });
 }
 
+function setChance() {
+    const chance = document.getElementById('chance').value;
+    
+    fetch('/set-chance', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({chance})
+    })
+      .then((response) => {
+        if(!response.ok) {
+            return response.json().then((data) => {
+                throw new Error(data.status);
+            });
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // No alert on success
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Error: ' + error.message);
+      })
+}
+
 function updateManipulatorButtons() {
   const btnTableRandomizer = document.getElementById('btnTableRandomizer');
   const btnCircleTableWalker = document.getElementById('btnCircleTableWalker');
@@ -140,6 +168,15 @@ function updateCircleParamsVisibility() {
   } else {
     circleParamsDiv.style.display = 'none';
   }
+}
+
+function updateChanceVisibility() {
+    const chanceParamsDiv = document.getElementById('chanceParams');
+    if(currentManipulator === 'TableRandomizer') {
+        chanceParamsDiv.style.display = 'block';
+    } else {
+        chanceParamsDiv.style.display = 'none';
+    }
 }
 
 function updateDisplayButtons() {
@@ -183,10 +220,20 @@ function renderTable(table, width, height) {
   }
 }
 
+function close() {
+    fetch('/close', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/none'
+        }
+    })
+}
+
 // Initialize the buttons and visibility on page load
 document.addEventListener('DOMContentLoaded', () => {
   updateManipulatorButtons();
   updateCircleParamsVisibility();
+  updateChanceVisibility();
   updateDisplayButtons();
   updateTableContainerVisibility();
   document.getElementById('currentFramerate').innerText = '2'; // Default framerate

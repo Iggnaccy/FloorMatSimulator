@@ -28,17 +28,22 @@ cursor: not-allowed;
 margin-top: 20px;
 }
 
+#chanceParams {
+margin-top: 20px;
+}
+
 #circleParams input {
+margin-right: 10px;
+margin-bottom: 10px;
+}
+
+#chanceParams input {
 margin-right: 10px;
 margin-bottom: 10px;
 }
 
 #tableDisplay {
 margin-top: 10px;
-}
-
-#tableDisplay div {
-/* Cells will be styled inline in script.js */
 }
 
 div {
