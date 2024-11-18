@@ -87,8 +87,13 @@ app.post('/set-table-manipulator', (req, res) => {
 app.post('/set-table-size', (req, res) => {
   const { width, height } = req.body;
 
-  tableWidth = parseInt(width) || 28;
-  tableHeight = parseInt(height) || 14;
+  tableWidth = parseInt(width);
+  tableHeight = parseInt(height);
+
+  if(isNaN(tableWidth) || isNaN(tableHeight)) {
+    return res.status(400).json({status: 'Invalid parameters'});
+  }
+
   tableSize = tableWidth * tableHeight;
   table = new Array(tableSize).fill(false);
 
